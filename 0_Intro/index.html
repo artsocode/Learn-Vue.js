@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8">
+        <title>Введение Vue.js</title>
+    </head>
+
+    <body>
+        <!-- #1 -->
+        <div id="app">
+            {{ message }}
+        </div>
+
+        <hr>
+
+        <!-- #2 -->
+        <div id="app-2">
+            <span v-bind:title="message">Наведите на меня курсор на пару секунд,
+            чтобы увидеть динамически связанное значение title</span>
+        </div>
+
+        <hr>
+
+        <!-- #3 -->
+        <div id="app-3">
+            <span v-if="seen">Сейчас текст видно</span>
+        </div>
+
+        <hr>
+
+        <!-- #4 -->
+        <div id="app-4">
+            <ol>
+                <li v-for="todo in todos">
+                    {{ todo.text }}
+                </li>
+            </ol>
+        </div>
+
+        <hr>
+
+        <!-- #5 -->
+        <div id="app-5">
+            <p>{{ message }}</p>
+            <button v-on:click="reverseMessage">Перевернуть сообщение</button>
+        </div>
+
+        <hr>
+
+        <!-- #6 -->
+        <div id="app-6">
+            <p>{{ message }}</p>
+            <input v-model="message">
+        </div>
+    </body>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        /* #1 Выводит привет мир! */
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: "Hello world!"
+            }
+        });
+
+        /* #2 Выводит динамический атрибут title */
+        var app2 = new Vue({
+            el: '#app-2',
+            data: {
+                message: 'Вы загрузили эту страницу: ' + new Date().toLocaleString()
+            }
+        });
+
+        /* #3 Управление видимостью объекта v-if */
+        var app3 = new Vue({
+            el: '#app-3',
+            data: {
+                seen: true
+            }
+        });
+
+        /* #4 Динамические списки и цикл v-for */
+        var app4 = new Vue({
+            el: '#app-4',
+            data: {
+                todos: [
+                    { text: "Изучить JavaScript." },
+                    { text: "Изучить Vue." },
+                    { text: "Создать что-нибудь классное!" },
+                ]
+            }
+        });
+
+        /* #5 Директива связаывания v-on на примере отзеркаливания текста*/
+        var app5 = new Vue({
+            el: '#app-5',
+            data: {
+                message: "Нужно больше баблишка!"
+            },
+            methods: {
+                reverseMessage: function() {
+                    this.message = this.message.split('').reverse().join('')
+                }
+            }
+        });
+
+        /* #6 Связывание поля формы и переменной */
+        var app6 = new Vue({
+            el: '#app-6',
+            data: {
+                message: 'Привет Vue'
+            }
+        });
+    </script>
+</html>
